@@ -1,5 +1,12 @@
 import React, { useContext, useState } from "react";
+import Paper from "@material-ui/core/Paper";
+import Container from "@material-ui/core/Container";
+
 import { CTX } from "./Store";
+// import Topics from "./Topics";
+// import Messages from "./Messages";
+// import SendMessage from "./SendMessage.jsx";
+import { Header } from "./Header";
 
 export const Dashboard = () => {
   //Context store
@@ -17,7 +24,7 @@ export const Dashboard = () => {
   return (
     <React.Fragment>
       <Header activeTopic={activeTopic} />
-      <Container>
+      {/* <Container>
         <Paper className="app-container">
           <Topics topics={topics} changeActiveTopic={changeActiveTopic} />
           <Messages chats={chats} activeTopic={activeTopic} />
@@ -29,7 +36,7 @@ export const Dashboard = () => {
             sendChatAction={sendChatAction}
           />
         </Paper>
-      </Container>
+      </Container> */}
     </React.Fragment>
   );
 };
