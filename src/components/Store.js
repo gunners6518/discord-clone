@@ -4,7 +4,7 @@ export const CTX = createContext();
 
 const baseUrl =
   process.env.NODE_ENV === "development"
-    ? "http://localhost:3000"
+    ? "http://localhost:3001"
     : "https://simple-chat.herokuapp.com";
 
 const initialState = {
