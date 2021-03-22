@@ -1,4 +1,4 @@
-import React, { createContext } from "react";
+import React, { createContext, useReducer } from "react";
 import io from "socket.io-client";
 export const CTX = createContext();
 
@@ -35,7 +35,7 @@ const sendChatAction = (message) => {
 };
 
 export const Store = (props) => {
-  const [chats, chatDispatch] = React.useReducer(chatReducer, initialState);
+  const [chats, chatDispatch] = useReducer(chatReducer, initialState);
 
   if (!socket) {
     socket = io(baseUrl);
@@ -46,6 +46,7 @@ export const Store = (props) => {
   }
 
   return (
+    // Providerを使ってchats、sendChatActionをCTXに格納してDashboardコンポーネントに渡している
     <CTX.Provider value={{ chats, sendChatAction }}>
       {props.children}
     </CTX.Provider>

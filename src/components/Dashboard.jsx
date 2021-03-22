@@ -9,20 +9,20 @@ import { SendMessage } from "./SendMessage.jsx";
 import { Header } from "./Header";
 
 export const Dashboard = () => {
-  //Context store
+  //CTXからchatsとsendchatsActionを受け取る
   const { chats, sendChatAction } = useContext(CTX);
 
-  // Get topics out
+  // chatsからtopic一覧を抜き出す
   const topics = Object.keys(chats);
 
-  // Local state
+  //localStateで定義してpropsでset関数を渡す
   const [chatMessage, changeChatMessage] = useState("");
   const [activeTopic, changeActiveTopic] = useState(topics[0]);
 
   const user = "eric" + Math.ceil(Math.random() * 100);
 
   return (
-    <React.Fragment>
+    <>
       <Header activeTopic={activeTopic} />
       <Container>
         <Paper className="app-container">
@@ -37,6 +37,6 @@ export const Dashboard = () => {
           />
         </Paper>
       </Container>
-    </React.Fragment>
+    </>
   );
 };
