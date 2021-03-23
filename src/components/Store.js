@@ -2,13 +2,13 @@ import React, { createContext, useReducer } from "react";
 import io from "socket.io-client";
 export const CTX = createContext();
 
-const baseUrl =
-  process.env.NODE_ENV === "development"
-    ? "http://localhost:3001"
-    : "https://simple-chat.herokuapp.com";
+const baseUrl = "http://localhost:3001";
 
 const initialState = {
-  general: [],
+  general: [
+    { from: "terry", msg: "hello" },
+    { from: "akita", msg: "hi!!" },
+  ],
   react: [],
   sports: [],
   business: [],
@@ -38,7 +38,7 @@ export const Store = (props) => {
   const [chats, chatDispatch] = useReducer(chatReducer, initialState);
 
   if (!socket) {
-    socket = io(baseUrl);
+    socket = io(":3001");
     socket.on("simple-chat", (msg) => {
       const action = { type: "UPDATE_CHATS", payload: msg };
       chatDispatch(action);

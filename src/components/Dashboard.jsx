@@ -19,7 +19,7 @@ export const Dashboard = () => {
   const [chatMessage, changeChatMessage] = useState("");
   const [activeTopic, changeActiveTopic] = useState(topics[0]);
 
-  const user = "eric" + Math.ceil(Math.random() * 100);
+  const user = "terry" + Math.ceil(Math.random() * 100);
 
   return (
     <>
