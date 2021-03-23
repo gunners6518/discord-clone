@@ -38,7 +38,7 @@ export const Store = (props) => {
   const [chats, chatDispatch] = useReducer(chatReducer, initialState);
 
   if (!socket) {
-    socket = io(":3001");
+    socket = io(baseUrl);
     socket.on("simple-chat", (msg) => {
       const action = { type: "UPDATE_CHATS", payload: msg };
       chatDispatch(action);
