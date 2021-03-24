@@ -4,20 +4,18 @@ import ListItem from "@material-ui/core/ListItem";
 
 export const Topics = ({ topics, changeActiveTopic }) => {
   return (
-    <div className="topics-grid">
-      <div className="topics-container">
-        <List>
-          {topics.map((topic) => (
-            <ListItem
-              onClick={(e) => changeActiveTopic(e.target.innerText)}
-              key={topic}
-              button
-            >
-              {topic}
-            </ListItem>
-          ))}
-        </List>
-      </div>
+    <div className="topics-container">
+      <List>
+        {topics.map((topic) => (
+          <ListItem
+            onClick={(e) => changeActiveTopic(topic)}
+            key={topic}
+            button
+          >
+            # {topic}
+          </ListItem>
+        ))}
+      </List>
     </div>
   );
 };
