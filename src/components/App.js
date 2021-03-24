@@ -6,14 +6,13 @@ import { ThemeProvider } from "@material-ui/styles";
 import green from "@material-ui/core/colors/green";
 
 const theme = createMuiTheme({
+  //カラーパレット追加
   palette: {
+    //ダークモード
+    type: "dark",
     primary: {
       main: "#7289da",
     },
-    secondary: green,
-  },
-  status: {
-    danger: "orange",
   },
 });
 

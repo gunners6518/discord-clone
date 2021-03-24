@@ -1,17 +1,21 @@
 import React, { useEffect } from "react";
-
+import { useSelector } from "react-redux";
 import { Chip, Icon } from "@material-ui/core";
 
-export const Messages = ({ chats, activeTopic }) => {
+export const Messages = ({ activeTopic }) => {
   let messageContainer;
   useEffect(() => {
     messageContainer.scrollIntoView();
   });
 
+  //storeからchatを取ってくる
+  const chatStore = useSelector((state) => state.chat);
+  console.log(activeTopic);
+
   return (
-    <div className="messages-flex-container">
+    <div className="messages-grid">
       <div className="messages-container">
-        {chats[activeTopic].map((message, i) => (
+        {chatStore[activeTopic].map((message, i) => (
           <div className="message" key={i}>
             <Chip
               avatar={<Icon>person</Icon>}
