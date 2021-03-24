@@ -4,7 +4,7 @@ import ListItem from "@material-ui/core/ListItem";
 
 export const Topics = ({ topics, changeActiveTopic }) => {
   return (
-    <div className="topics-container">
+    <div className="topics-flex-container">
       <List>
         {topics.map((topic) => (
           <ListItem

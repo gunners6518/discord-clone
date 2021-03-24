@@ -9,7 +9,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 export const Header = ({ activeTopic }) => {
   return (
     <AppBar position="static">
-      <Toolbar>
+      <Toolbar className="app-header">
         <IconButton edge="start" color="inherit" aria-label="menu">
           <MenuIcon />
         </IconButton>

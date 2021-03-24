@@ -1,42 +1,36 @@
 import React, { useContext, useState } from "react";
-import Paper from "@material-ui/core/Paper";
-import Container from "@material-ui/core/Container";
-
-import { CTX } from "./Store";
 import { Topics } from "./Topics";
 import { Messages } from "./Messages";
 import { SendMessage } from "./SendMessage.jsx";
 import { Header } from "./Header";
+import { useSelector } from "react-redux";
+
+const user = "terry" + Math.ceil(Math.random() * 100);
 
 export const Dashboard = () => {
-  //CTXからchatsとsendchatsActionを受け取る
-  const { chats, sendChatAction } = useContext(CTX);
+  //storeからuseSelectorでstateを受け取っている;
+  const chatStore = useSelector((state) => state.chat);
 
   // chatsからtopic一覧を抜き出す
-  const topics = Object.keys(chats);
+  const topics = Object.keys(chatStore);
 
   //localStateで定義してpropsでset関数を渡す
   const [chatMessage, changeChatMessage] = useState("");
   const [activeTopic, changeActiveTopic] = useState(topics[0]);
 
-  const user = "terry" + Math.ceil(Math.random() * 100);
-
   return (
-    <>
-      <Header activeTopic={activeTopic} />
-      <Container>
-        <Paper className="app-container">
-          <Topics topics={topics} changeActiveTopic={changeActiveTopic} />
-          <Messages chats={chats} activeTopic={activeTopic} />
-          <SendMessage
-            chatMessage={chatMessage}
-            changeChatMessage={changeChatMessage}
-            user={user}
-            activeTopic={activeTopic}
-            sendChatAction={sendChatAction}
-          />
-        </Paper>
-      </Container>
-    </>
+    <div>
+      <div className="main-container">
+        <Header activeTopic={activeTopic} />
+        <Topics topics={topics} changeActiveTopic={changeActiveTopic} />
+        <Messages chats={chatStore} activeTopic={activeTopic} />
+        <SendMessage
+          chatMessage={chatMessage}
+          changeChatMessage={changeChatMessage}
+          user={user}
+          activeTopic={activeTopic}
+        />
+      </div>
+    </div>
   );
 };
