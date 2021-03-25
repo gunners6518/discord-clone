@@ -25,7 +25,8 @@ export const Sidebar = ({ topics, servers }) => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
-  // Local state
+  //Local state
+  //ユーザーネームを変更できる
   const [userName, changeUserName] = useState(user.userName);
   const [snackBarVisible, changeSnackBarVisible] = useState(false);
   const [snackBarMessage, changeSnackBarMessage] = useState("");
@@ -33,11 +34,13 @@ export const Sidebar = ({ topics, servers }) => {
   const handleKeyPress = (e) => {
     console.log("fired");
     if (e.key === "Enter") {
+      //Enterで一旦SignInのactionとする
       dispatch({
         type: "SIGN_IN",
         payload: { userId: "1", userName: userName },
       });
       changeSnackBarMessage(`Name changed to : ${userName}`);
+      //Snackbarは通知なので一時的にtrueに
       changeSnackBarVisible(true);
       setTimeout(() => changeSnackBarVisible(false), 2000);
     }
@@ -48,6 +51,7 @@ export const Sidebar = ({ topics, servers }) => {
       <div className="servers-container">
         <List>
           {servers.map((server) => (
+            //サserver部分
             <Tooltip
               title={server}
               key={server}
@@ -55,6 +59,7 @@ export const Sidebar = ({ topics, servers }) => {
               className="server-tooltip"
             >
               <IconButton className="server-icon">
+                {/* changeServerのactionsを実行している */}
                 <GroupWork onClick={() => dispatch(changeServer(server))} />
               </IconButton>
             </Tooltip>
@@ -66,7 +71,7 @@ export const Sidebar = ({ topics, servers }) => {
           <ListItem className="title-container">{activeServer}</ListItem>
           {topics.map((topic) => (
             <ListItem
-              onClick={(e) => dispatch(changeTopic(topic))}
+              onClick={() => dispatch(changeTopic(topic))}
               key={topic}
               button
             >

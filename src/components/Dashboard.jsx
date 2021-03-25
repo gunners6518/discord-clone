@@ -11,9 +11,11 @@ export const Dashboard = () => {
   //storeからuseSelectorでstateを受け取っている;
   const chatStore = useSelector((state) => state.chat);
 
-  //chatStore.serversからtopicを受け取る
+  //chatStoreからserver一覧を取得
   const servers = Object.keys(chatStore.servers);
+  //activeserverのtopic一覧を取得
   const topics = Object.keys(chatStore.servers[chatStore.activeServer]);
+  console.log(chatStore);
 
   return (
     <div>

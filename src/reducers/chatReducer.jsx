@@ -20,6 +20,7 @@ const initialState = {
 };
 
 export const chatReducer = (state = initialState, action) => {
+  console.log(action.payload);
   switch (action.type) {
     //現在activeなサーバー、トピックにメッセージのデータを入れる
     case "UPDATE_CHAT":

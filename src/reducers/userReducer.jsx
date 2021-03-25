@@ -8,12 +8,12 @@ const initialState = {
 };
 
 export const userReducer = (state = initialState, action) => {
-  console.log(action);
   switch (action.type) {
     case SIGN_IN:
       return {
         ...state,
         isSignedIn: true,
+        //payloadにこのactionだとuserデータが入っている
         userId: action.payload.userId,
         userName: action.payload.userName,
       };
