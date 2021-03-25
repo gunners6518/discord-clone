@@ -32,9 +32,7 @@ export const Header = ({ topics, servers }) => {
         >
           <Sidebar topics={topics} servers={servers} />
         </SwipeableDrawer>
-        <Typography variant="h6">
-          {activeServer} - {activeTopic}
-        </Typography>
+        <Typography variant="h5">{activeTopic}</Typography>
       </Toolbar>
     </AppBar>
   );

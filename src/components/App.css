@@ -12,7 +12,6 @@ body {
 
 .sidebar-grid {
   grid-area: Sidebar;
-  background: #2e3136;
   box-shadow: inset -2px 0px 10px -4px rgba(0, 0, 0, 0.75);
 }
 
@@ -30,25 +29,71 @@ body {
   justify-content: center;
 }
 
-.right-container {
-  display: contents;
-}
-
 /* Sidebar.jsx */
-.topics-container {
+.sidebar-container {
   display: flex;
   height: 100%;
-  padding: 1em;
+}
+
+.topics-container {
+  position: relative;
+  display: flex;
+  height: 100%;
   box-sizing: border-box;
   color: white;
+  flex-basis: 80%;
+  height: 100%;
+  background: #2f3136;
 }
 
 .servers-container {
   display: flex;
   height: 100%;
-  padding: 1em;
   box-sizing: border-box;
   color: white;
+  flex-basis: 20%;
+  height: 100%;
+  text-align: center;
+  background: #202225;
+}
+.server-tooltip {
+  font-size: 14px;
+}
+
+.server-icon svg {
+  width: 48px;
+  height: 48px;
+}
+
+.topic-list {
+  width: 100%;
+  padding-top: 0 !important;
+}
+
+.title-container {
+  box-shadow: 0 2px 0px 0px #202225;
+  height: 64px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  font-family: "Roboto";
+}
+
+.topic-hashtag {
+  font-style: unset;
+  font-size: 24px;
+  padding-right: 8px;
+  color: grey;
+}
+
+.user-options {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  box-sizing: border-box;
+  background: #2a2c31;
 }
 
 /* Messages.jsx */
@@ -61,10 +106,22 @@ body {
   bottom: 0;
   max-height: 100%;
   overflow-y: auto;
+  padding-bottom: 0px;
 }
 
 .message {
-  padding: 0.3em;
+  padding: 1.01em !important;
+  color: white;
+  border-top: 1px solid lightgrey;
+}
+
+.message-text {
+  color: white !important;
+}
+
+.topic-title {
+  padding-left: 16px;
+  color: white;
 }
 
 /* SendMessage.jsx */
@@ -85,17 +142,17 @@ body {
 .send-message-border {
   position: absolute;
   height: 100%;
-  width: 90%;
+  width: 95%;
   border-top: 1px solid lightgrey;
 }
 
 /* MEDIA QUERIES FOR DESKTOP */
 @media only screen and (min-width: 600px) {
   .grid-container {
-    height: calc(100vh - 64px);
+    height: calc(99.9vh);
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1.5fr 0.5fr;
+    grid-template-columns: 340px 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1.5fr 0.35fr;
     grid-template-areas: "Sidebar Messages Messages Messages" "Sidebar Messages Messages Messages" "Sidebar Send-Messages Send-Messages Send-Messages";
   }
 
@@ -108,7 +165,7 @@ body {
 
 @media only screen and (max-width: 599px) {
   .grid-container {
-    height: calc(100vh - 56px);
+    height: calc(99.9vh);
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1.7fr 0.1fr;
@@ -117,5 +174,9 @@ body {
 
   .sidebar-grid {
     display: none;
+  }
+
+  .title-container {
+    height: 56px;
   }
 }

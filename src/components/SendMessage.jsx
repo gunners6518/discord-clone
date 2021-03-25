@@ -1,12 +1,17 @@
+import React, { useState } from "react";
 import TextField from "@material-ui/core/TextField";
 import { useDispatch } from "react-redux";
 import { sendMessage } from "../actions";
 import { useSelector } from "react-redux";
 
-export const SendMessage = ({ chatMessage, changeChatMessage, user }) => {
+export const SendMessage = () => {
   // Get store
   const { activeServer, activeTopic } = useSelector((state) => state.chat);
+  const { userName } = useSelector((state) => state.user);
   const dispatch = useDispatch();
+
+  //chageChatはsendMessage内でのみ扱う
+  const [chatMessage, changeChatMessage] = useState("");
 
   const handleSubmit = (message) => {
     dispatch(sendMessage(message));
@@ -20,7 +25,7 @@ export const SendMessage = ({ chatMessage, changeChatMessage, user }) => {
       handleSubmit({
         server: activeServer,
         topic: activeTopic,
-        from: user,
+        from: userName,
         msg: chatMessage,
       });
   };

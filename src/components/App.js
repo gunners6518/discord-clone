@@ -6,6 +6,25 @@ import { ThemeProvider } from "@material-ui/styles";
 import green from "@material-ui/core/colors/green";
 
 const theme = createMuiTheme({
+  overrides: {
+    MuiTooltip: {
+      tooltip: {
+        fontSize: "16px",
+        backgroundColor: "black",
+      },
+    },
+    MuiSnackbarContent: {
+      root: {
+        backgroundColor: "#202225",
+        color: "white",
+      },
+    },
+    MuiAppBar: {
+      colorPrimary: {
+        backgroundColor: "#36393E",
+      },
+    },
+  },
   //カラーパレット追加
   palette: {
     //ダークモード

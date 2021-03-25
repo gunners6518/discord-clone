@@ -3,6 +3,8 @@ import {
   UPDATE_CHAT,
   CHANGE_SERVER,
   CHANGE_TOPIC,
+  SIGN_IN,
+  SIGN_OUT,
 } from "./types";
 
 export const sendMessage = (message) => ({
@@ -23,4 +25,14 @@ export const changeServer = (server) => ({
 export const changeTopic = (server) => ({
   type: CHANGE_TOPIC,
   payload: server,
+});
+
+export const signIn = (user) => ({
+  type: SIGN_IN,
+  payload: user,
+});
+
+export const signOut = (user) => ({
+  type: SIGN_IN,
+  payload: user,
 });
