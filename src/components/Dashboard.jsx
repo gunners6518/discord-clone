@@ -1,5 +1,5 @@
-import React, { useContext, useState } from "react";
-import { Topics } from "./Topics";
+import React, { useEffect, useState } from "react";
+import { Sidebar } from "./Sidebar";
 import { Messages } from "./Messages";
 import { SendMessage } from "./SendMessage.jsx";
 import { Header } from "./Header";
@@ -11,23 +11,23 @@ export const Dashboard = () => {
   //storeからuseSelectorでstateを受け取っている;
   const chatStore = useSelector((state) => state.chat);
 
-  // chatsからtopic一覧を抜き出す
-  const topics = Object.keys(chatStore);
-
-  //localStateで定義してpropsでset関数を渡す
+  //サーバー連携のいらないページ単位での変更はlocalStateを使う
   const [chatMessage, changeChatMessage] = useState("");
-  const [activeTopic, changeActiveTopic] = useState(topics[0]);
+
+  //chatStore.serversからtopicを受け取る
+  const servers = Object.keys(chatStore.servers);
+  const topics = Object.keys(chatStore.servers[chatStore.activeServer]);
 
   return (
     <div>
-      <Header topics={topics} activeTopic={activeTopic} />
+      <Header topics={topics} servers={servers} />
       <div className="grid-container">
-        <div className="topics-grid">
-          <Topics topics={topics} changeActiveTopic={changeActiveTopic} />
+        <div className="sidebar-grid">
+          <Sidebar topics={topics} servers={servers} />
         </div>
 
         <div className="messages-grid">
-          <Messages activeTopic={activeTopic} />
+          <Messages topics={topics} />
         </div>
 
         <div className="send-messages-grid">
@@ -35,7 +35,6 @@ export const Dashboard = () => {
             chatMessage={chatMessage}
             changeChatMessage={changeChatMessage}
             user={user}
-            activeTopic={activeTopic}
           />
         </div>
       </div>

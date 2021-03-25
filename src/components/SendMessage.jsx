@@ -1,13 +1,11 @@
 import TextField from "@material-ui/core/TextField";
 import { useDispatch } from "react-redux";
 import { sendMessage } from "../actions";
+import { useSelector } from "react-redux";
 
-export const SendMessage = ({
-  chatMessage,
-  changeChatMessage,
-  activeTopic,
-  user,
-}) => {
+export const SendMessage = ({ chatMessage, changeChatMessage, user }) => {
+  // Get store
+  const { activeServer, activeTopic } = useSelector((state) => state.chat);
   const dispatch = useDispatch();
 
   const handleSubmit = (message) => {
@@ -19,7 +17,12 @@ export const SendMessage = ({
   const handleKeyPress = (e) => {
     //Enterキーが押されたら送信する
     if (e.key === "Enter")
-      handleSubmit({ topic: activeTopic, from: user, msg: chatMessage });
+      handleSubmit({
+        server: activeServer,
+        topic: activeTopic,
+        from: user,
+        msg: chatMessage,
+      });
   };
   return (
     <>

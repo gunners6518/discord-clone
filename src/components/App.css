@@ -10,8 +10,8 @@ body {
 
 /* Dashboard */
 
-.topics-grid {
-  grid-area: Topics;
+.sidebar-grid {
+  grid-area: Sidebar;
   background: #2e3136;
   box-shadow: inset -2px 0px 10px -4px rgba(0, 0, 0, 0.75);
 }
@@ -34,8 +34,17 @@ body {
   display: contents;
 }
 
-/* Topics.jsx */
+/* Sidebar.jsx */
 .topics-container {
+  display: flex;
+  height: 100%;
+  padding: 1em;
+  box-sizing: border-box;
+  color: white;
+}
+
+.servers-container {
+  display: flex;
   height: 100%;
   padding: 1em;
   box-sizing: border-box;
@@ -87,7 +96,7 @@ body {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr 1.5fr 0.5fr;
-    grid-template-areas: "Topics Messages Messages Messages" "Topics Messages Messages Messages" "Topics Send-Messages Send-Messages Send-Messages";
+    grid-template-areas: "Sidebar Messages Messages Messages" "Sidebar Messages Messages Messages" "Sidebar Send-Messages Send-Messages Send-Messages";
   }
 
   .menu-burger-button {
@@ -106,7 +115,7 @@ body {
     grid-template-areas: "Messages" "Send-Messages";
   }
 
-  .topics-grid {
+  .sidebar-grid {
     display: none;
   }
 }
