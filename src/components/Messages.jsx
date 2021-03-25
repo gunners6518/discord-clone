@@ -8,7 +8,6 @@ import {
   Avatar,
   ListItemText,
 } from "@material-ui/core";
-import PersonIcon from "@material-ui/icons/Person";
 import { Header } from "./Header";
 
 export const Messages = ({ topics, servers }) => {
@@ -33,7 +32,11 @@ export const Messages = ({ topics, servers }) => {
             <ListItem className="message" key={i}>
               <ListItemAvatar>
                 <Avatar>
-                  <PersonIcon />
+                  <img
+                    src={process.env.PUBLIC_URL + "/user.png"}
+                    alt="user icon"
+                    height="48"
+                  />
                 </Avatar>
               </ListItemAvatar>
               <ListItemText

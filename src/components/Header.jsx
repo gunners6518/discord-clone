@@ -11,7 +11,7 @@ import { Sidebar } from "./Sidebar";
 
 export const Header = ({ topics, servers }) => {
   // Get store
-  const { activeServer, activeTopic } = useSelector((state) => state.chat);
+  const { activeTopic } = useSelector((state) => state.chat);
   const [drawerVisible, changeDrawerVisible] = useState(false);
 
   return (
@@ -22,17 +22,24 @@ export const Header = ({ topics, servers }) => {
           color="inherit"
           aria-label="menu"
           className="menu-burger-button"
+          onClick={() => changeDrawerVisible(true)}
         >
-          <MenuIcon onClick={() => changeDrawerVisible(true)} />
+          <MenuIcon />
         </IconButton>
         <SwipeableDrawer
           anchor="left"
           open={drawerVisible}
           onClose={() => changeDrawerVisible(false)}
+          onOpen={() => null}
         >
-          <Sidebar topics={topics} servers={servers} />
+          <Sidebar
+            topics={topics}
+            servers={servers}
+            changeDrawerVisible={changeDrawerVisible}
+          />
         </SwipeableDrawer>
-        <Typography variant="h5">{activeTopic}</Typography>
+        <i className="topic-hashtag">#</i>
+        <Typography variant="h6"> {activeTopic.toLowerCase()} </Typography>
       </Toolbar>
     </AppBar>
   );

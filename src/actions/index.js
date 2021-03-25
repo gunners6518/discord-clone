@@ -33,6 +33,6 @@ export const signIn = (user) => ({
 });
 
 export const signOut = (user) => ({
-  type: SIGN_Out,
+  type: SIGN_OUT,
   payload: user,
 });

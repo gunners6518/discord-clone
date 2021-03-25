@@ -9,7 +9,6 @@ import {
   ListItem,
   ListItemAvatar,
   Avatar,
-  ListItemText,
   Tooltip,
   IconButton,
   Typography,
@@ -17,11 +16,11 @@ import {
   Snackbar,
 } from "@material-ui/core";
 
-import { changeServer, changeTopic, signIn, signOut } from "../actions";
+import { changeServer, changeTopic } from "../actions";
 
-export const Sidebar = ({ topics, servers }) => {
+export const Sidebar = ({ topics, servers, changeDrawerVisible }) => {
   // Get store state
-  const { activeServer, activeTopic } = useSelector((state) => state.chat);
+  const { activeServer } = useSelector((state) => state.chat);
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
@@ -51,16 +50,19 @@ export const Sidebar = ({ topics, servers }) => {
       <div className="servers-container">
         <List>
           {servers.map((server) => (
-            //サserver部分
+            //server部分
             <Tooltip
               title={server}
               key={server}
               placement="right"
               className="server-tooltip"
             >
-              <IconButton className="server-icon">
+              <IconButton
+                className="server-icon"
+                onClick={() => dispatch(changeServer(server))}
+              >
                 {/* changeServerのactionsを実行している */}
-                <GroupWork onClick={() => dispatch(changeServer(server))} />
+                <GroupWork />
               </IconButton>
             </Tooltip>
           ))}
@@ -71,16 +73,15 @@ export const Sidebar = ({ topics, servers }) => {
           <ListItem className="title-container">{activeServer}</ListItem>
           {topics.map((topic) => (
             <ListItem
-              onClick={() => dispatch(changeTopic(topic))}
+              onClick={(e) => {
+                dispatch(changeTopic(topic));
+                if (typeof changeDrawerVisible !== "undefined")
+                  changeDrawerVisible(false);
+              }}
               key={topic}
               button
             >
-              <i
-                style={{ verticalAlign: "text-bottom", fontWeight: "bold" }}
-                className="topic-hashtag"
-              >
-                #
-              </i>
+              <i className="topic-hashtag">#</i>
               <Typography variant="body1">{topic}</Typography>
             </ListItem>
           ))}

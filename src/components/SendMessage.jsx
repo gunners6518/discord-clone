@@ -1,8 +1,12 @@
 import React, { useState } from "react";
-import TextField from "@material-ui/core/TextField";
+import "emoji-mart/css/emoji-mart.css";
+import { Picker } from "emoji-mart";
+import SmileyFace from "@material-ui/icons/SentimentVerySatisfied";
 import { useDispatch } from "react-redux";
 import { sendMessage } from "../actions";
 import { useSelector } from "react-redux";
+//コンテンツの大きさに合わせて高さが変わってくれるテキストエリア
+import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 
 export const SendMessage = () => {
   // Get store
@@ -12,16 +16,18 @@ export const SendMessage = () => {
 
   //chageChatはsendMessage内でのみ扱う
   const [chatMessage, changeChatMessage] = useState("");
+  const [emojiMenuVisible, changeEmojiMenuVisible] = useState(false);
 
   const handleSubmit = (message) => {
+    console.log(message);
     dispatch(sendMessage(message));
     //送信後はTextFieldを空にする
     changeChatMessage("");
   };
 
   const handleKeyPress = (e) => {
-    //Enterキーが押されたら送信する
-    if (e.key === "Enter")
+    //Enterキーが押されたら送信する（Shift+Enterは除外）
+    if (e.key === "Enter" && !e.shiftKey)
       handleSubmit({
         server: activeServer,
         topic: activeTopic,
@@ -29,21 +35,54 @@ export const SendMessage = () => {
         msg: chatMessage,
       });
   };
+
+  const handleOnChange = (e) => {
+    // Catches enters (dont render to screen)
+    // Shift enter still works
+    if (e.target.value !== "\n") changeChatMessage(e.target.value);
+  };
+
+  //絵文字選択したらメッセージに絵文字を加えて絵文字メニュー閉じる
+  const handleEmojiClick = (e) => {
+    changeChatMessage(chatMessage + e.native);
+    changeEmojiMenuVisible(false);
+  };
+
+  window.onclick = (e) => {
+    if (String(e.target.className).includes("send-message-emoji-menu"))
+      changeEmojiMenuVisible(false);
+  };
+
   return (
     <>
       <div className="send-message-border" />
       <div className="send-messages-grid">
         <div class="send-message-container">
-          <TextField
+          <TextareaAutosize
             autoComplete="off"
             color="blue"
             id="filled-name"
             className="message-input"
             label={`Message # ${activeTopic}`}
             value={chatMessage}
-            onChange={(e) => changeChatMessage(e.target.value)}
+            onChange={(e) => handleOnChange(e)}
             onKeyPress={(e) => handleKeyPress(e)}
           />
+          <SmileyFace
+            className="send-message-emoji-button"
+            onClick={() => changeEmojiMenuVisible(!emojiMenuVisible)}
+          />
+        </div>
+        <div
+          className={
+            emojiMenuVisible
+              ? "send-message-emoji-menu show"
+              : "send-message-emoji-menu hide"
+          }
+        >
+          <div className="emoji-wrapper">
+            <Picker set="emojione" onSelect={(e) => handleEmojiClick(e)} />
+          </div>
         </div>
       </div>
     </>

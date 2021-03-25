@@ -22,6 +22,7 @@ const theme = createMuiTheme({
     MuiAppBar: {
       colorPrimary: {
         backgroundColor: "#36393E",
+        position: "absolute",
       },
     },
   },

@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { Sidebar } from "./Sidebar";
 import { Messages } from "./Messages";
 import { SendMessage } from "./SendMessage.jsx";
-import { Header } from "./Header";
 import { useSelector } from "react-redux";
 
 const user = "terry" + Math.ceil(Math.random() * 100);
