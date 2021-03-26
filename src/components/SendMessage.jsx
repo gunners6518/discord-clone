@@ -19,7 +19,6 @@ export const SendMessage = () => {
   const [emojiMenuVisible, changeEmojiMenuVisible] = useState(false);
 
   const handleSubmit = (message) => {
-    console.log(message);
     dispatch(sendMessage(message));
     //送信後はTextFieldを空にする
     changeChatMessage("");
@@ -56,33 +55,29 @@ export const SendMessage = () => {
   return (
     <>
       <div className="send-message-border" />
-      <div className="send-messages-grid">
-        <div class="send-message-container">
-          <TextareaAutosize
-            autoComplete="off"
-            color="blue"
-            id="filled-name"
-            className="message-input"
-            label={`Message # ${activeTopic}`}
-            value={chatMessage}
-            onChange={(e) => handleOnChange(e)}
-            onKeyPress={(e) => handleKeyPress(e)}
-          />
-          <SmileyFace
-            className="send-message-emoji-button"
-            onClick={() => changeEmojiMenuVisible(!emojiMenuVisible)}
-          />
-        </div>
-        <div
-          className={
-            emojiMenuVisible
-              ? "send-message-emoji-menu show"
-              : "send-message-emoji-menu hide"
-          }
-        >
-          <div className="emoji-wrapper">
-            <Picker set="emojione" onSelect={(e) => handleEmojiClick(e)} />
-          </div>
+      <div className="send-message-container">
+        <TextareaAutosize
+          aria-label="empty textarea"
+          placeholder={`Message  #${activeTopic}`}
+          className="message-text-area"
+          value={chatMessage}
+          onChange={(e) => handleOnChange(e)}
+          onKeyPress={(e) => handleKeyPress(e)}
+        />
+        <SmileyFace
+          className="send-message-emoji-button"
+          onClick={() => changeEmojiMenuVisible(!emojiMenuVisible)}
+        />
+      </div>
+      <div
+        className={
+          emojiMenuVisible
+            ? "send-message-emoji-menu show"
+            : "send-message-emoji-menu hide"
+        }
+      >
+        <div className="emoji-wrapper">
+          <Picker onSelect={(e) => handleEmojiClick(e)} />
         </div>
       </div>
     </>

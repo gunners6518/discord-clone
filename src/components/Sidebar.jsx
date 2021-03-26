@@ -31,7 +31,6 @@ export const Sidebar = ({ topics, servers, changeDrawerVisible }) => {
   const [snackBarMessage, changeSnackBarMessage] = useState("");
 
   const handleKeyPress = (e) => {
-    console.log("fired");
     if (e.key === "Enter") {
       //Enterで一旦SignInのactionとする
       dispatch({

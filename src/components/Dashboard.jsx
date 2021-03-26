@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Sidebar } from "./Sidebar";
 import { Messages } from "./Messages";
 import { SendMessage } from "./SendMessage.jsx";
 import { useSelector } from "react-redux";
-
-const user = "terry" + Math.ceil(Math.random() * 100);
+import { getInitialData } from "../actions";
+import { useDispatch } from "react-redux";
 
 export const Dashboard = () => {
   //storeからuseSelectorでstateを受け取っている;
@@ -14,7 +14,13 @@ export const Dashboard = () => {
   const servers = Object.keys(chatStore.servers);
   //activeserverのtopic一覧を取得
   const topics = Object.keys(chatStore.servers[chatStore.activeServer]);
-  console.log(chatStore);
+
+  const dispatch = useDispatch();
+
+  // ロード時にユーザーの初期データを所得
+  useEffect(() => {
+    dispatch(getInitialData());
+  }, [dispatch]);
 
   return (
     <div>

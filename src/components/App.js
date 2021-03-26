@@ -3,7 +3,6 @@ import "./App.css";
 import { Dashboard } from "./Dashboard";
 import { createMuiTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
-import green from "@material-ui/core/colors/green";
 
 const theme = createMuiTheme({
   overrides: {
@@ -33,6 +32,13 @@ const theme = createMuiTheme({
     primary: {
       main: "#7289da",
     },
+  },
+  typography: {
+    fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+    fontSize: 14,
+    fontWeightLight: 300,
+    fontWeightRegular: 400,
+    fontWeightMedium: 500,
   },
 });
 
