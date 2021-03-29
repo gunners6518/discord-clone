@@ -26,11 +26,11 @@ export const Dashboard = () => {
     <div>
       <div className="grid-container">
         <div className="sidebar-grid">
-          <Sidebar topics={topics} servers={servers} />
+          <Sidebar />
         </div>
 
         <div className="messages-grid">
-          <Messages topics={topics} servers={servers} />
+          <Messages />
         </div>
 
         <div className="send-messages-grid">

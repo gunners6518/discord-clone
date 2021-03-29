@@ -10,9 +10,11 @@ import {
 } from "@material-ui/core";
 import { Header } from "./Header";
 
-export const Messages = ({ topics, servers }) => {
+export const Messages = () => {
   //storeからchatを取ってくる
   const chatStore = useSelector((state) => state.chat);
+  const servers = Object.keys(chatStore.servers);
+  const topics = Object.keys(chatStore.servers[chatStore.activeServer]);
   const { activeServer, activeTopic } = chatStore;
 
   // ref

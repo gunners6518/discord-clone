@@ -19,9 +19,12 @@ import {
 import { changeServer, changeTopic } from "../actions";
 import { GoogleOAuth } from "./GoogleOAuth";
 
-export const Sidebar = ({ topics, servers, changeDrawerVisible }) => {
+export const Sidebar = ({ changeDrawerVisible }) => {
   // Get store state
-  const { activeServer } = useSelector((state) => state.chat);
+  const chatStore = useSelector((state) => state.chat);
+  const servers = Object.keys(chatStore.servers);
+  const topics = Object.keys(chatStore.servers[chatStore.activeServer]);
+  const { activeServer } = chatStore;
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
