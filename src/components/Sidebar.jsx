@@ -12,37 +12,18 @@ import {
   Tooltip,
   IconButton,
   Typography,
-  TextField,
-  Snackbar,
+  ListItemText,
+  ListItemSecondaryAction,
 } from "@material-ui/core";
 
 import { changeServer, changeTopic } from "../actions";
+import { GoogleOAuth } from "./GoogleOAuth";
 
 export const Sidebar = ({ topics, servers, changeDrawerVisible }) => {
   // Get store state
   const { activeServer } = useSelector((state) => state.chat);
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
-
-  //Local state
-  //ユーザーネームを変更できる
-  const [userName, changeUserName] = useState(user.userName);
-  const [snackBarVisible, changeSnackBarVisible] = useState(false);
-  const [snackBarMessage, changeSnackBarMessage] = useState("");
-
-  const handleKeyPress = (e) => {
-    if (e.key === "Enter") {
-      //Enterで一旦SignInのactionとする
-      dispatch({
-        type: "SIGN_IN",
-        payload: { userId: "1", userName: userName },
-      });
-      changeSnackBarMessage(`Name changed to : ${userName}`);
-      //Snackbarは通知なので一時的にtrueに
-      changeSnackBarVisible(true);
-      setTimeout(() => changeSnackBarVisible(false), 2000);
-    }
-  };
 
   return (
     <div className="sidebar-container">
@@ -92,18 +73,11 @@ export const Sidebar = ({ topics, servers, changeDrawerVisible }) => {
                 <PersonIcon />
               </Avatar>
             </ListItemAvatar>
-            <TextField
-              id="user-name"
-              value={userName}
-              onChange={(e) => changeUserName(e.target.value)}
-              onKeyPress={(e) => handleKeyPress(e)}
-            />
+            <ListItemText primary={user.userName} />
+            <ListItemSecondaryAction>
+              <GoogleOAuth />
+            </ListItemSecondaryAction>
           </ListItem>
-          <Snackbar
-            anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-            open={snackBarVisible}
-            message={snackBarMessage}
-          />
         </div>
       </div>
     </div>

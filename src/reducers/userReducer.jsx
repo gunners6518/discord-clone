@@ -3,8 +3,8 @@ import { SIGN_IN, SIGN_OUT } from "../actions/types";
 const initialState = {
   isSignedIn: false,
   isAdmin: false,
-  userId: null,
-  userName: "anonymous" + Math.floor(Math.random(0) * 100),
+  userName: "terry" + Math.floor(Math.random(0) * 100),
+  userEmail: null,
 };
 
 export const userReducer = (state = initialState, action) => {
@@ -16,13 +16,14 @@ export const userReducer = (state = initialState, action) => {
         //payloadにこのactionだとuserデータが入っている
         userId: action.payload.userId,
         userName: action.payload.userName,
+        userEmail: action.payload.userEmail,
       };
     case SIGN_OUT:
       return {
         ...state,
         isSignedIn: false,
         userId: null,
-        userName: "anonymous" + Math.random(0) * 100,
+        userName: "terry" + Math.floor(Math.random(0) * 100),
       };
     default:
       return state;
