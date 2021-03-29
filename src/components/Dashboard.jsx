@@ -7,20 +7,15 @@ import { getInitialData } from "../actions";
 import { useDispatch } from "react-redux";
 
 export const Dashboard = () => {
-  //storeからuseSelectorでstateを受け取っている;
-  const chatStore = useSelector((state) => state.chat);
-
-  //chatStoreからserver一覧を取得
-  const servers = Object.keys(chatStore.servers);
-  //activeserverのtopic一覧を取得
-  const topics = Object.keys(chatStore.servers[chatStore.activeServer]);
-
+  const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
-  // ロード時にユーザーの初期データを所得
+  //ユーザーのサインイン状態が変わる度にデータを取ってくる
   useEffect(() => {
-    dispatch(getInitialData());
-  }, [dispatch]);
+    if (user.isSignedIn) {
+      dispatch(getInitialData());
+    }
+  }, [dispatch, user.isSignedIn]);
 
   return (
     <div>

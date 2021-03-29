@@ -37,10 +37,15 @@ export const getInitialData = (oAuthData) => async (dispatch) => {
   dispatch({ type: GET_INITIAL_DATA, payload: res.data });
 };
 
-export const signIn = (user) => ({
-  type: SIGN_IN,
-  payload: user,
-});
+//サインイン時に、ユーザーが存在しない場合はバックエンドにポストしてユーザーを作成する。
+export const signIn = (user) => async (dispatch) => {
+  let url = `${baseUrl}/user?userId=${user.userId}&userName=${user.userName}`;
+  const res = axios.post(url);
+  //resがtrueならユーザーは存在するのでsignInする
+  if (res) {
+    dispatch({ type: SIGN_IN, payload: user });
+  }
+};
 
 export const signOut = (user) => ({
   type: SIGN_OUT,
