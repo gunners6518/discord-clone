@@ -1,4 +1,3 @@
-/* global gapi */
 import React, { useEffect, useRef } from "react";
 import { Button } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
@@ -24,7 +23,7 @@ export const GoogleOAuth = () => {
         // thenを使用することで、処理が成功した場合のみ、処理を進めることができる
         .then(() => {
           auth.current = window.gapi.auth2.getAuthInstance();
-          console.log(auth);
+          console.log("auth", auth);
           onAuthChange(auth.current.isSignedIn.get());
           // Listen for changes
           this.auth.isSignedIn.listen(() => {
