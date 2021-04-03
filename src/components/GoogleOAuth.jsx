@@ -23,6 +23,7 @@ export const GoogleOAuth = () => {
         // thenを使用することで、処理が成功した場合のみ、処理を進めることができる
         .then(() => {
           auth.current = window.gapi.auth2.getAuthInstance();
+          console.log(window.gapi.auth2.getAuthInstance());
           console.log("auth", auth);
           onAuthChange(auth.current.isSignedIn.get());
           // Listen for changes
@@ -35,9 +36,16 @@ export const GoogleOAuth = () => {
   }, []);
 
   const onLoginButtonClick = (action) => {
-    if (action === "login") auth.current.signIn();
-    else auth.current.signOut();
+    if (action === "login") {
+      auth.current.signIn();
+      console.log("ログイン");
+    } else {
+      auth.current.signOut();
+      console.log("ログアウト");
+    }
   };
+
+  const text = `タイトル：` + user.isSignedIn;
 
   const onAuthChange = (isSignedIn) => {
     //useのsignのstateをdispatchから更新
@@ -54,6 +62,7 @@ export const GoogleOAuth = () => {
       ) : (
         <Button onClick={() => onLoginButtonClick("login")}>Sign In</Button>
       )}
+      <p>{text}</p>
     </div>
   );
 };

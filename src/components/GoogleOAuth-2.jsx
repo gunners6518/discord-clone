@@ -32,6 +32,7 @@ export const GoogleOAuth2 = () => {
     if (action === "login") {
       signIn();
       console.log(user);
+      console.log("ログイン");
       responseGoogle();
     } else {
       signOut();
@@ -59,6 +60,7 @@ export const GoogleOAuth2 = () => {
           onSuccess={onLoginButtonClick("login")}
           onFailure={onLoginFailure()}
           cookiePolicy={"single_host_origin"}
+          isSignedIn={true}
         />
       )}
       <p>{text}</p>

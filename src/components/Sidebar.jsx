@@ -79,7 +79,7 @@ export const Sidebar = ({ changeDrawerVisible }) => {
             </ListItemAvatar>
             <ListItemText primary={user.userName} />
             <ListItemSecondaryAction>
-              <GoogleOAuth2 />
+              <GoogleOAuth />
             </ListItemSecondaryAction>
           </ListItem>
         </div>
