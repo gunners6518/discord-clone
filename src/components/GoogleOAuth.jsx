@@ -4,15 +4,17 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { signIn, signOut } from "../actions";
 
-//ログイン画面
 export const GoogleOAuth = () => {
+  // Get store state
   const user = useSelector((state) => state.user);
+
+  // Dispatch
   const dispatch = useDispatch();
 
+  // When app loads, grab users initial data
+  // Includes all channels, history and settings
   let auth = useRef();
-
   useEffect(() => {
-    //OAuth接続のおまじない
     window.gapi.load("client:auth2", () => {
       window.gapi.client
         .init({
@@ -20,35 +22,27 @@ export const GoogleOAuth = () => {
             "193248965975-lm5drb0mkrhepcipvomamrjamgcfopkq.apps.googleusercontent.com",
           scope: "email",
         })
-        // thenを使用することで、処理が成功した場合のみ、処理を進めることができる
         .then(() => {
           auth.current = window.gapi.auth2.getAuthInstance();
           console.log(window.gapi.auth2.getAuthInstance());
           console.log("auth", auth);
           onAuthChange(auth.current.isSignedIn.get());
           // Listen for changes
-          this.auth.isSignedIn.listen(() => {
+          auth.current.isSignedIn.listen(() => {
             onAuthChange(auth.current.isSignedIn.get());
           });
         });
     });
-    console.log(auth.current);
   }, []);
 
   const onLoginButtonClick = (action) => {
-    if (action === "login") {
-      auth.current.signIn();
-      console.log("ログイン");
-    } else {
-      auth.current.signOut();
-      console.log("ログアウト");
-    }
+    if (action === "login") auth.current.signIn();
+    else auth.current.signOut();
   };
 
   const text = `タイトル：` + user.isSignedIn;
 
   const onAuthChange = (isSignedIn) => {
-    //useのsignのstateをdispatchから更新
     if (isSignedIn) {
       const { Eea, ig, U3 } = auth.current.currentUser.get().getBasicProfile();
       dispatch(signIn({ userId: Eea, userName: ig, userEmail: U3 }));

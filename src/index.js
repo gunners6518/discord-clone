@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 import { createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import { socketMiddleware } from "./middleware/socketMiddleware";
+import { auth } from "./services/firebase";
 
 import reducers from "./reducers";
 
