@@ -4,6 +4,11 @@ import { Dashboard } from "./Dashboard";
 import { createMuiTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
 
+import { SignIn } from "./SignIn";
+import { SignOut } from "./SignOut";
+import { auth } from "./../firebase.js";
+import { useAuthState } from "react-firebase-hooks/auth";
+
 const theme = createMuiTheme({
   overrides: {
     MuiTooltip: {
@@ -43,9 +48,16 @@ const theme = createMuiTheme({
 });
 
 export const App = () => {
+  const [user] = useAuthState(auth);
   return (
-    <ThemeProvider theme={theme}>
-      <Dashboard></Dashboard>
-    </ThemeProvider>
+    <>
+      <header>
+        <h1>⚛️🔥💬</h1>
+        <SignOut />
+      </header>
+      <ThemeProvider theme={theme}>
+        {user ? <Dashboard /> : <SignIn />}
+      </ThemeProvider>
+    </>
   );
 };

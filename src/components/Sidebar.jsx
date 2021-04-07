@@ -17,8 +17,6 @@ import {
 } from "@material-ui/core";
 
 import { changeServer, changeTopic } from "../actions";
-import { GoogleOAuth } from "./GoogleOAuth";
-import { GoogleOAuth2 } from "./GoogleOAuth-2";
 
 export const Sidebar = ({ changeDrawerVisible }) => {
   // Get store state
@@ -78,9 +76,6 @@ export const Sidebar = ({ changeDrawerVisible }) => {
               </Avatar>
             </ListItemAvatar>
             <ListItemText primary={user.userName} />
-            <ListItemSecondaryAction>
-              <GoogleOAuth />
-            </ListItemSecondaryAction>
           </ListItem>
         </div>
       </div>
