@@ -6,8 +6,9 @@ import { ThemeProvider } from "@material-ui/styles";
 
 import { SignIn } from "./SignIn";
 import { SignOut } from "./SignOut";
-import { auth } from "./../firebase.js";
+import { config } from "./../firebase.js";
 import { useAuthState } from "react-firebase-hooks/auth";
+import firebase from "firebase";
 
 const theme = createMuiTheme({
   overrides: {
@@ -47,12 +48,19 @@ const theme = createMuiTheme({
   },
 });
 
+const auth = firebase.auth();
+
 export const App = () => {
+  if (!firebase.apps.length) {
+    firebase.initializeApp(config);
+  } else {
+    firebase.app(); // if already initialized, use that one
+  }
   const [user] = useAuthState(auth);
   return (
     <>
       <header>
-        <h1>⚛️🔥💬</h1>
+        <h1></h1>
         <SignOut />
       </header>
       <ThemeProvider theme={theme}>
