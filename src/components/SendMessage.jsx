@@ -8,6 +8,11 @@ import { useSelector } from "react-redux";
 //コンテンツの大きさに合わせて高さが変わってくれるテキストエリア
 import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 
+//firestore
+import firebase from "firebase/app";
+import "firebase/firestore";
+import "firebase/auth";
+
 export const SendMessage = () => {
   // Get store
   const { activeServer, activeTopic } = useSelector((state) => state.chat);
@@ -18,8 +23,16 @@ export const SendMessage = () => {
   const [chatMessage, changeChatMessage] = useState("");
   const [emojiMenuVisible, changeEmojiMenuVisible] = useState(false);
 
-  const handleSubmit = (message) => {
+  //firestoreの認証情報を取得
+  const auth = firebase.auth();
+  const firestore = firebase.firestore();
+  const chatsRef = firestore.collection("chats");
+
+  const handleSubmit = async (message) => {
     dispatch(sendMessage(message));
+    //chatRefにmessageのデータを入れている
+    await chatsRef.add(message);
+
     //送信後はTextFieldを空にする
     changeChatMessage("");
   };

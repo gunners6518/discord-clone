@@ -48,14 +48,14 @@ const theme = createMuiTheme({
   },
 });
 
-const auth = firebase.auth();
-
 export const App = () => {
   if (!firebase.apps.length) {
     firebase.initializeApp(config);
   } else {
     firebase.app(); // if already initialized, use that one
   }
+
+  const auth = firebase.auth();
   const [user] = useAuthState(auth);
   return (
     <>
