@@ -11,9 +11,6 @@ import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 //firestore
 import firebase from "firebase/app";
 import "firebase/firestore";
-import "firebase/auth";
-
-import { useCollectionData } from "react-firebase-hooks/firestore";
 
 export const SendMessage = () => {
   // Get store
@@ -26,18 +23,14 @@ export const SendMessage = () => {
   const [emojiMenuVisible, changeEmojiMenuVisible] = useState(false);
 
   //firestoreの認証情報を取得
-  const auth = firebase.auth();
+  //firestoreの認証情報を取得
   const firestore = firebase.firestore();
-  const chatsRef = firestore.collection("chats");
-
-  //firestoreから取得
-  const [chats] = useCollectionData(chatsRef, { idField: "id" });
-  console.log(chats);
+  const messagesRef = firestore.collection("messages");
 
   const handleSubmit = async (message) => {
     dispatch(sendMessage(message));
-    //chatRefにmessageのデータを入れている
-    await chatsRef.add(message);
+    //messagesRefにmessageのデータを入れている
+    await messagesRef.add(message);
 
     //送信後はTextFieldを空にする
     changeChatMessage("");
@@ -51,6 +44,7 @@ export const SendMessage = () => {
         topic: activeTopic,
         from: userName,
         msg: chatMessage,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       });
   };
 
