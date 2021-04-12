@@ -45,24 +45,28 @@ export const Messages = () => {
       <div className="messages-container">
         <List>
           {messages &&
-            messages.map((message, i) => (
-              <ListItem className="message" key={i}>
-                <ListItemAvatar>
-                  <Avatar>
-                    <img
-                      src={process.env.PUBLIC_URL + "/user.png"}
-                      alt="user icon"
-                      height="48"
+            messages.map(
+              (message, i) =>
+                message.topic === activeTopic &&
+                message.server === activeServer && (
+                  <ListItem className="message" key={i}>
+                    <ListItemAvatar>
+                      <Avatar>
+                        <img
+                          src={process.env.PUBLIC_URL + "/user.png"}
+                          alt="user icon"
+                          height="48"
+                        />
+                      </Avatar>
+                    </ListItemAvatar>
+                    <ListItemText
+                      primary={message.from}
+                      secondary={message.msg}
+                      className="message-text"
                     />
-                  </Avatar>
-                </ListItemAvatar>
-                <ListItemText
-                  primary={message.from}
-                  secondary={message.msg}
-                  className="message-text"
-                />
-              </ListItem>
-            ))}
+                  </ListItem>
+                )
+            )}
         </List>
         <div ref={(element) => (messageContainer = element)}></div>
       </div>
