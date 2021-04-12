@@ -13,6 +13,8 @@ import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
 
+import { useCollectionData } from "react-firebase-hooks/firestore";
+
 export const SendMessage = () => {
   // Get store
   const { activeServer, activeTopic } = useSelector((state) => state.chat);
@@ -27,6 +29,10 @@ export const SendMessage = () => {
   const auth = firebase.auth();
   const firestore = firebase.firestore();
   const chatsRef = firestore.collection("chats");
+
+  //firestoreから取得
+  const [chats] = useCollectionData(chatsRef, { idField: "id" });
+  console.log(chats);
 
   const handleSubmit = async (message) => {
     dispatch(sendMessage(message));
