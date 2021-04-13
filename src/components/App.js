@@ -5,7 +5,6 @@ import { createMuiTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
 
 import { SignIn } from "./SignIn";
-import { SignOut } from "./SignOut";
 import { config } from "./../firebase.js";
 import { useAuthState } from "react-firebase-hooks/auth";
 import firebase from "firebase";
@@ -59,10 +58,7 @@ export const App = () => {
   const [user] = useAuthState(auth);
   return (
     <>
-      <header>
-        <h1></h1>
-        <SignOut />
-      </header>
+      <header></header>
       <ThemeProvider theme={theme}>
         {user ? <Dashboard /> : <SignIn />}
       </ThemeProvider>

@@ -1,4 +1,5 @@
 import React from "react";
+import { Button } from "@material-ui/core";
 import firebase from "firebase/app";
 import "firebase/auth";
 
@@ -10,13 +11,8 @@ export const SignIn = () => {
     auth.signInWithPopup(provider);
   };
   return (
-    <>
-      <button className="sign-in" onClick={SignInWithGoogle}>
-        Sign in with Google
-      </button>
-      <p>
-        Do not violate the community guidelines or you will be banned for life!
-      </p>
-    </>
+    <Button className="sign-in" variant="contained" onClick={SignInWithGoogle}>
+      Sign in with Google
+    </Button>
   );
 };

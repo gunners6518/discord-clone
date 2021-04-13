@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
+import { SignOut } from "./SignOut";
 
 import PersonIcon from "@material-ui/icons/Person";
 import GroupWork from "@material-ui/icons/GroupWork";
@@ -76,6 +77,7 @@ export const Sidebar = ({ changeDrawerVisible }) => {
               </Avatar>
             </ListItemAvatar>
             <ListItemText primary={user.userName} />
+            <SignOut />
           </ListItem>
         </div>
       </div>
