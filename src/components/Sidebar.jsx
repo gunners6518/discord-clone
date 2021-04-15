@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { SignOut } from "./SignOut";
-
 import PersonIcon from "@material-ui/icons/Person";
 import GroupWork from "@material-ui/icons/GroupWork";
 import {
@@ -27,6 +26,16 @@ export const Sidebar = ({ changeDrawerVisible }) => {
   const { activeServer } = chatStore;
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
+
+  const [modalVisible, setModalVisible] = useState(false);
+  const [modalType, setModalType] = useState(null);
+
+  const handleOpen = () => {
+    setModalVisible(true);
+  };
+  const handleClose = () => {
+    setModalVisible(false);
+  };
 
   return (
     <div className="sidebar-container">
@@ -78,6 +87,11 @@ export const Sidebar = ({ changeDrawerVisible }) => {
             </ListItemAvatar>
             <ListItemText primary={user.userName} />
             <SignOut />
+            <div>
+              <button type="button" onClick={handleOpen}>
+                Open
+              </button>
+            </div>
           </ListItem>
         </div>
       </div>

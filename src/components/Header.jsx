@@ -8,6 +8,7 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import { SwipeableDrawer } from "@material-ui/core";
 import { Sidebar } from "./Sidebar";
+import { CreateJoinModal } from "./CreateJoinModal";
 
 export const Header = ({ topics, servers }) => {
   // Get store
