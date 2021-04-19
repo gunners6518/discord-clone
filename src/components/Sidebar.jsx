@@ -18,6 +18,12 @@ import {
 
 import { changeServer, changeTopic } from "../actions";
 
+//firestore
+import firebase from "firebase/app";
+import "firebase/firestore";
+
+import { useCollectionData } from "react-firebase-hooks/firestore";
+
 export const Sidebar = ({ changeDrawerVisible }) => {
   // Get store state
   const chatStore = useSelector((state) => state.chat);
@@ -30,11 +36,22 @@ export const Sidebar = ({ changeDrawerVisible }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalType, setModalType] = useState(null);
 
-  const handleOpen = () => {
-    setModalVisible(true);
-  };
-  const handleClose = () => {
-    setModalVisible(false);
+  //server名リネーム時のstate
+  const [serverValue, setServerValue] = useState(activeServer);
+
+  //firestoreの認証情報を取得
+  const firestore = firebase.firestore();
+  const messagesRef = firestore
+    .collection("messages")
+    .doc("7Hi1AhTdk81JbNI8Lx5n");
+
+  const setNewName = async (e) => {
+    e.preventDefault();
+
+    await messagesRef.update({
+      server: serverValue,
+    });
+    console.log(messagesRef);
   };
 
   return (
@@ -62,7 +79,19 @@ export const Sidebar = ({ changeDrawerVisible }) => {
       </div>
       <div className="topics-container">
         <List className="topic-list">
-          <ListItem className="title-container">{activeServer}</ListItem>
+          {/* form-sample */}
+          <ListItem className="title-container">
+            <form onSubmit={setNewName} className="">
+              <input
+                type="text"
+                value={serverValue}
+                onChange={(e) => setServerValue(e.target.value)}
+              />
+              <input type="submit" value="更新" />
+            </form>
+            {/* 仮でserverValueを置く todo:chatStoreを更新 */}
+            {serverValue}
+          </ListItem>
           {topics.map((topic) => (
             <ListItem
               onClick={(e) => {
@@ -87,11 +116,6 @@ export const Sidebar = ({ changeDrawerVisible }) => {
             </ListItemAvatar>
             <ListItemText primary={user.userName} />
             <SignOut />
-            <div>
-              <button type="button" onClick={handleOpen}>
-                Open
-              </button>
-            </div>
           </ListItem>
         </div>
       </div>
